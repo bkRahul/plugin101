@@ -13,13 +13,36 @@ Author URI: http://rahulsatya1068gmail.com
 */
 
 
-if ( !defined( 'ABSPATH' ) ): die(); endif;
-
 defined('ABSPATH') or die('You are not allowed here');
 
-if ( ! function_exists( 'add_action' ) ) {
-	echo 'Hey, you cant access this file';
-	exit;
+
+class pluginDev {
+	function activate() {
+		
+	}
+	function deactivate() {
+		
+	}
+	function uninstall() {
+		
+	}
 }
+
+if ( class_exists( 'pluginDev' ) ) {
+	$pluginDev = new pluginDev();
+}
+
+
+//activation
+
+register_activation_hook( __FILE__, array($pluginDev, 'activate') );
+
+//deactivation
+
+register_deactivation_hook( __FILE__, array($pluginDev, 'deactivate') );
+
+//uninstall
+
+
 
 ?>
