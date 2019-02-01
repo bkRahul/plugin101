@@ -2,8 +2,7 @@
 /**
  * @package plugin101
  * @version 1.0.0
- */
-/*
+
 Plugin Name: Plugin101
 Plugin URI: http://wordpress.org/plugins/plugin101/
 Description: This is an first attempt on writing a plugin built with help of alecadd's tutorials on plugin development.
@@ -28,9 +27,7 @@ class pluginDev {
 	function deactivate() {
 		flush_rewrite_rules();
 	}
-	function uninstall() {
-		
-	}
+
 
 	function custom_post_type() {
 		register_post_type('book', ['public' => true, 'label' => 'Books']);
@@ -51,5 +48,3 @@ register_activation_hook( __FILE__, array($pluginDev, 'activate') );
 register_deactivation_hook( __FILE__, array($pluginDev, 'deactivate') );
 
 //uninstall
-
-?>
