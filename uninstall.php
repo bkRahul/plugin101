@@ -17,7 +17,11 @@ foreach ($books as $book) {
 }
 
 
-//delete via database
+//delete stored data via sql
 
+// global $wpdb;
 
+// $wpdb->query("DELETE FROM wp_posts WHERE post_type = 'book'");
+// $wpdb->query("DELETE FROM wp_posts_meta WHERE post_id NOT IN( SELECT id FROM wp_posts )");
+// $wpdb->query("DELETE FROM wp_term_relationships WHERE post_id NOT IN( SELECT id FROM wp_posts )");
 
