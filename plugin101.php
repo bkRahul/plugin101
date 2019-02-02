@@ -28,7 +28,6 @@ class pluginDev {
 		flush_rewrite_rules();
 	}
 
-
 	function custom_post_type() {
 		register_post_type('book', ['public' => true, 'label' => 'Books']);
 	}
@@ -47,4 +46,3 @@ register_activation_hook( __FILE__, array($pluginDev, 'activate') );
 
 register_deactivation_hook( __FILE__, array($pluginDev, 'deactivate') );
 
-//uninstall
