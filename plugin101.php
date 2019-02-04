@@ -19,6 +19,9 @@ class pluginDev {
 		add_action('init', array($this, 'custom_post_type') );
 	}
 
+	function register_admin_scripts() {
+		add_action('admin_enqueue_scripts', array( $this, 'enqueue') );
+	}
 
 	function activate() {
 		$this->custom_post_type();
@@ -31,10 +34,16 @@ class pluginDev {
 	function custom_post_type() {
 		register_post_type('book', ['public' => true, 'label' => 'Books']);
 	}
+
+	function enqueue() {
+		wp_enqueue_style('plugin101style', plugins_url('/assets/style.css', __FILE__) );
+		wp_enqueue_script('plugin101script', plugins_url('/assets/script.js', __FILE__) );
+	}
 }
 
 if ( class_exists( 'pluginDev' ) ) {
 	$pluginDev = new pluginDev();
+	$pluginDev->register_admin_scripts();
 }
 
 
