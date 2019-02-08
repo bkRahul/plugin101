@@ -23,14 +23,6 @@ class pluginDev {
 		add_action('admin_enqueue_scripts', array( $this, 'enqueue') );
 	}
 
-	function activate() {
-		$this->custom_post_type();
-		flush_rewrite_rules();
-	}
-	function deactivate() {
-		flush_rewrite_rules();
-	}
-
 	function custom_post_type() {
 		register_post_type('book', ['public' => true, 'label' => 'Books']);
 	}
@@ -49,9 +41,13 @@ if ( class_exists( 'pluginDev' ) ) {
 
 //activation
 
-register_activation_hook( __FILE__, array($pluginDev, 'activate') );
+require_once plugin_dir_path( __FILE__).'plugin101-activate.php';
+
+register_activation_hook( __FILE__, array('pluginDevAeactivate', 'activate') );
 
 //deactivation
 
-register_deactivation_hook( __FILE__, array($pluginDev, 'deactivate') );
+require_once plugin_dir_path( __FILE__).'plugin101-deactivate.php';
+
+register_deactivation_hook( __FILE__, array('pluginDevDeactivate', 'deactivate') );
 
