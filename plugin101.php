@@ -13,6 +13,9 @@ Author URI: http://rahulsatya1068gmail.com
 
 defined('ABSPATH') or die('You are not allowed here');
 
+
+if ( !class_exists( 'pluginDev' ) ) {
+
 class pluginDev {
 
 	function __construct() {
@@ -28,12 +31,18 @@ class pluginDev {
 	}
 
 	function enqueue() {
+		//enqueue style and js scripts
 		wp_enqueue_style('plugin101style', plugins_url('/assets/style.css', __FILE__) );
 		wp_enqueue_script('plugin101script', plugins_url('/assets/script.js', __FILE__) );
 	}
+
+	function activate() {
+		require_once plugin_dir_path( __FILE__).'plugin101-activate.php';
+		pluginDevActivate::activate(); 
+	}
 }
 
-if ( class_exists( 'pluginDev' ) ) {
+
 	$pluginDev = new pluginDev();
 	$pluginDev->register_admin_scripts();
 }
@@ -41,9 +50,8 @@ if ( class_exists( 'pluginDev' ) ) {
 
 //activation
 
-require_once plugin_dir_path( __FILE__).'plugin101-activate.php';
+register_activation_hook( __FILE__, array($pluginDev, 'activate') );
 
-register_activation_hook( __FILE__, array('pluginDevAeactivate', 'activate') );
 
 //deactivation
 
