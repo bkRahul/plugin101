@@ -18,7 +18,21 @@ if ( !class_exists( 'pluginDev' ) ) {
 
 class pluginDev {
 
+	public $plugin;
+
 	function __construct() {
+		$this->plugin = plugin_basename( __FILE__ );
+	}
+
+	function register() {
+		add_action('admin_enqueue_scripts', array( $this, 'enqueue') );
+
+		add_action('admin_menu', array($this, 'add_admin_pages' ) );
+
+		add_filter("plugin_action_link_$this->plugin", array($this, 'settings_link'));
+	}
+
+	protected function create_post_type() {
 		add_action('init', array($this, 'custom_post_type') );
 	}
 
@@ -26,6 +40,13 @@ class pluginDev {
 		add_action('admin_enqueue_scripts', array( $this, 'enqueue') );
 	}
 
+	public function add_admin_pages() {
+		add_menu_page('pluginDev', 'pluginDev', 'manage_options', 'plugin_Dev', array($this, 'admin_index'), 'dashicons-store', 110);
+	}
+
+	public function admin_index() {
+		require_once plugin_dir_path( __FILE__).'templates/admin.php';
+	}
 	function custom_post_type() {
 		register_post_type('book', ['public' => true, 'label' => 'Books']);
 	}
@@ -44,7 +65,7 @@ class pluginDev {
 
 
 	$pluginDev = new pluginDev();
-	$pluginDev->register_admin_scripts();
+	$pluginDev->register();
 }
 
 
