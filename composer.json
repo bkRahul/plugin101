@@ -1,0 +1,17 @@
+{
+    "name": "dell/plugin101",
+    "description": "starter plugin development with alecadd",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "bkRahul",
+            "email": "rahulsatya1068@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}

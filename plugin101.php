@@ -13,6 +13,14 @@ Author URI: http://rahulsatya1068gmail.com
 
 defined('ABSPATH') or die('You are not allowed here');
 
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+use Inc\Admin\AdminPages;
+
 
 if ( !class_exists( 'pluginDev' ) ) {
 
@@ -65,8 +73,8 @@ class pluginDev {
 	}
 
 	function activate() {
-		require_once plugin_dir_path( __FILE__).'inc/plugin101-activate.php';
-		pluginDevActivate::activate(); 
+		//require_once plugin_dir_path( __FILE__).'inc/plugin101-activate.php';
+		Activate::activate(); 
 	}
 }
 
@@ -83,7 +91,7 @@ register_activation_hook( __FILE__, array($pluginDev, 'activate') );
 
 //deactivation
 
-require_once plugin_dir_path( __FILE__).'inc/plugin101-deactivate.php';
+//require_once plugin_dir_path( __FILE__).'inc/plugin101-deactivate.php';
 
-register_deactivation_hook( __FILE__, array('inc/pluginDevDeactivate', 'deactivate') );
+register_deactivation_hook( __FILE__, array('Deactivate', 'deactivate') );
 
