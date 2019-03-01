@@ -8,7 +8,9 @@
 
 namespace Inc\Base;
 
-class Enqueue {
+use \Inc\Base\BaseController;
+
+class Enqueue extends BaseController {
 
 	function register() {
 
@@ -17,8 +19,8 @@ class Enqueue {
 	}
 	function enqueue() {
 		//enqueue style and js scripts
-		wp_enqueue_style('plugin101style', PLUGIN_URL.'assets/style.css' );
-		wp_enqueue_script('plugin101script', PLUGIN_URL.'assets/script.js'  );
+		wp_enqueue_style('plugin101style', $this->plugin_url . 'assets/style.css' );
+		wp_enqueue_script('plugin101script', $this->plugin_url .'assets/script.js'  );
 	}
 	
 }
