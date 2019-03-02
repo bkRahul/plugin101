@@ -11,8 +11,11 @@ Version: 1.0.0
 Author URI: http://rahulsatya1068gmail.com
 */
 
+
+//If file is called directly
 defined('ABSPATH') or die('You are not allowed here');
 
+//Require once composer autoload
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
@@ -84,23 +87,29 @@ class pluginDev {
 	$pluginDev->register();
 }
 
+*/
+
+use Inc\Base\Activate;
+use Inc\Base\Deactivate;
 
 //activation
 
-register_activation_hook( __FILE__, array($pluginDev, 'activate') );
+function plugin101Activate() {
+	Activate::activate();
+}
 
+register_activation_hook( __FILE__, 'plugin101Activate' );
 
 //deactivation
 
-//require_once plugin_dir_path( __FILE__).'inc/plugin101-deactivate.php';
+function plugin101Deactivate() {
+	Deactivate::deactivate();
+}
 
-register_deactivation_hook( __FILE__, array('Deactivate', 'deactivate') );
+register_deactivation_hook( __FILE__, 'plugin101Deactivate' );
 
-*/
 
-define( 'PLUGIN_PATH', plugin_dir_path( __FILE__) );
-define( 'PLUGIN_URL', plugin_dir_url( __FILE__) );
-
+//Initialize all core classes of plugin
 if( class_exists( 'Inc\\Init' ) ) {
 	Inc\Init::register_services();
 }
